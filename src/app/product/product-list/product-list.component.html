@@ -1,0 +1,68 @@
+<div class="container" *ngIf="products">
+
+  <div class="row text-center text-sm-left d-flex align-items-end">
+    <div class="col-sm-6 mb-2 mb-sm-0">
+      <h1>Product list</h1>
+    </div>
+
+    <div class="col-sm-6 mb-2 mb-sm-0">
+      <div class="form-group">
+        <input type="text" list="autoComplete" class="form-control text-center text-sm-left" [(ngModel)]="userFilter.name" placeholder="Search product name.."
+          id="searchProducts" name="searchProducts">
+        <datalist id="autoComplete">
+          <option [value]="product?.name" *ngFor="let product of products | slice:0:5 | filterBy: userFilter">
+        </datalist>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 text-center text-sm-right mb-3">
+      <span>Admin: </span>
+      <a [routerLink]="['/create']">New Product</a>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table">
+
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" class="th-sort text-nowrap" (click)="sortByName()" 
+          [ngClass]="{'sort-asc': sortBy === 'name' && sortNameAsc,'sort-desc': sortBy === 'name' && !sortNameAsc}">
+            Name
+          </th>
+          <th scope="col">Description</th>
+          <th scope="col" class="th-sort text-nowrap" (click)="sortByPrice()" 
+          [ngClass]="{'sort-asc': sortBy === 'price' && sortPriceAsc,'sort-desc': sortBy === 'price' && !sortPriceAsc}">
+            Price
+          </th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let product of products | filterBy: userFilter; let i = index">
+          <th scope="row">{{i +1}}</th>
+          <td>{{product?.name}}</td>
+          <td>{{product?.description}}</td>
+          <td>{{product?.price | currency}}</td>
+          <td>
+            <a [routerLink]="['/edit', product._id]">
+              <button type="button" class="btn btn-warning">Edit</button>
+            </a>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="deleteProduct(product?._id)">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5" *ngIf="(products | filterBy: userFilter).length === 0">No matching Products</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>

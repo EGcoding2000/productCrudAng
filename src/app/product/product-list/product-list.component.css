@@ -1,0 +1,12 @@
+.th-sort:hover { 
+    color: yellow;
+    cursor: pointer;
+}
+
+.sort-asc::after{
+    content: '▲';
+}
+
+.sort-desc::after{
+    content: '▼';
+}

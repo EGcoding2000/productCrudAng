@@ -1,0 +1,17 @@
+<div class="container">
+
+  <div class="row text-center d-flex align-items-end">
+    <div class="col-sm-8 mb-2 mb-sm-0 text-sm-left">
+      <h1>Add New Product</h1>
+    </div>
+
+    <div class="col-sm-4 mb-2 mb-sm-0 text-sm-right">
+      <a [routerLink]="['/']">
+        <button type="button" class="btn btn-success">Product list</button>
+      </a>
+    </div>
+  </div>
+
+  <app-product-form [product]="newProduct" (submitedProduct)="createProduct($event)"></app-product-form>
+
+</div>

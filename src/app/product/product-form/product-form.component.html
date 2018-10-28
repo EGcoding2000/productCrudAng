@@ -1,0 +1,34 @@
+<div class="row mb-3">
+  <div class="col-12">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="form-group text-center text-sm-left">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" formControlName="name" [(ngModel)]="product.name" id="name" name="name" required>
+        <span *ngIf="!productForm.get('name').valid && productForm.get('name').touched" class="help-block">
+          <span *ngIf="productForm.hasError('required', 'name')">This field is required!</span>
+        </span>
+      </div>
+
+      <div class="form-group text-center text-sm-left">
+        <label for="description">Description:</label>
+        <textarea class="form-control" formControlName="description" [(ngModel)]="product.description" id="description" name="description"
+          required></textarea>
+        <span *ngIf="!productForm.get('description').valid && productForm.get('description').touched" class="help-block">
+          <span *ngIf="productForm.hasError('required', 'description')">This field is required!</span>
+        </span>
+      </div>
+      <div class="form-group text-center text-sm-left">
+        <label for="price">Price:</label>
+        <input type="number" class="form-control" formControlName="price" [(ngModel)]="product.price" name="price" id="price" min="0"
+          required>
+        <span *ngIf="!productForm.get('price').valid && productForm.get('price').touched" class="help-block">
+          <span *ngIf="productForm.hasError('required', 'price')">This field is required!</span>
+          <span *ngIf="productForm.hasError('min', 'price')">Price should be equal or greater than 0!</span>
+        </span>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
