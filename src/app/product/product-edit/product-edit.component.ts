@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from './../../services/products.service';
 import { IProduct } from './../../models/product';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-edit',
@@ -12,7 +11,6 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 export class ProductEditComponent implements OnInit {
 
   public editProduct = {} as IProduct;
-  productForm: FormGroup;
   productId: string;
 
 
@@ -25,12 +23,6 @@ export class ProductEditComponent implements OnInit {
   ngOnInit() {
     this.productId = this.route.snapshot.paramMap.get("id");
     this.getProduct();
-    this.productForm = new FormGroup({
-      'name': new FormControl(null, [Validators.required]),
-      'description': new FormControl(null, [Validators.required]),
-      'price': new FormControl(null, [Validators.required]),
-    });
-
   }
 
   getProduct(){
@@ -42,10 +34,6 @@ export class ProductEditComponent implements OnInit {
     });
   }
   onEditProduct(submitedProduct) {
-    // if (this.productForm.invalid) {
-    //   return;
-    // }
-    // console.log(this.productForm);
     this.productService.editProduct(submitedProduct).subscribe(res => {
     this._router.navigate(['/']);
 

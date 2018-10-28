@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from './../../services/products.service';
 import { IProduct } from './../../models/product';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-new',
@@ -12,7 +11,6 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 export class ProductNewComponent implements OnInit {
 
   public newProduct={} as IProduct;
-  productForm: FormGroup;
 
   constructor(
     private productService: ProductsService,
@@ -21,11 +19,6 @@ export class ProductNewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.productForm = new FormGroup({
-      'name': new FormControl(null, [Validators.required]),
-      'description': new FormControl(null, [Validators.required]),
-      'price': new FormControl(null, [Validators.required, Validators.min(0)]),
-    });
   }
 
   

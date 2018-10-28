@@ -58,8 +58,8 @@
             <button type="button" class="btn btn-danger" (click)="deleteProduct(product?._id)">Delete</button>
           </td>
         </tr>
-        <tr>
-          <td colspan="5" *ngIf="(products | filterBy: userFilter).length === 0">No matching Products</td>
+        <tr *ngIf="(products | filterBy: userFilter).length === 0">
+          <td colspan="5">No matching Products</td>
         </tr>
       </tbody>
 

@@ -26,12 +26,10 @@ const appRoutes: Routes = [
   {
     path: '',
     component: ProductListComponent,
-    //data: { title: 'Heroes List' }
   },
   {
     path: 'create',
     component: ProductNewComponent,
-    //data: { title: 'Heroes List' }
   },
   {
     path: "edit/:id",
